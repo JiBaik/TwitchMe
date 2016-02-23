@@ -1,0 +1,38 @@
+body{
+    background-color: #859398;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.navbar{ 
+    background-image: none;
+    background-color: #2f363d;
+    border: none;
+}
+.navbar a{
+    color: white !important;
+}
+.navbar a:hover{
+   background-color: white !important;
+   color: #2f363d !important;
+}
+.nav a{
+    color: white !important;
+}
+.nav a:hover{
+   background-color: white !important;
+   color: #2f363d !important;
+}
+.navbar-header button{
+    color: white !important;
+}
+.icon-bar{
+    background-color: white !important;
+}
+.navbar-header button:hover{
+   background-color: white !important;
+   color: #2f363d !important;
+}
+

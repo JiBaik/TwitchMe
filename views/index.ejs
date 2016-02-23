@@ -1,0 +1,56 @@
+<% include ./partials/header %>
+<link rel = "stylesheet" href= "stylesheets/index.css">
+<div class="container-fluid" id="page">
+    <h1> TwitchMe </h1>
+    <div  class="row">
+        <div id = "listdiv" class="col-lg-4">
+            <div class="list-group">
+                <ul>
+                    <p class="lead"> <% if(!currentUser){ %>
+                        <a href="/login">Login</a>
+                     <% }
+                     else{ %>
+                         <%=currentUser.username %>
+                        <% }%>
+                    :   <button id = "listtoggle"class="btn btn-danger pull-right">List</button> <button class="btn btn-danger pull-right chattoggle">Chat</button></p>
+                    <li class="list-group-item active" >Your Top 10: <span class="rank">Rank:</span></li>
+                   <% user.list.sort(function (a, b) { if (a.rank > b.rank) { return 1;} if (a.value < b.value) { return -1;} return 0;}); %>
+                        <% user.list.forEach(function(listitem){ %>
+                            <li class="list-group-item stream">
+                                    <i class = 'fa fa-play play'></i>
+                                    <form style="display: inline" class="pull-left" action="/deleteitem/<%=listitem._id%>?_method=DELETE" method="POST"> 
+                                    <span class ="deletebutton"><button class="fa fa-trash btn btn-danger"></button></span></form>
+                                    <form style="display: inline" action="/edititem/<%=listitem._id%>?_method=PUT" method="POST">
+                                        <input class = "streamname" type="text" name="listitem[streamName]" value = "<%= listitem.streamName %>" required>|
+                                           
+                                        <input class = "pull-right" type="number" min="1" max = "10" name = "listitem[rank]" value = "<%=listitem.rank%>" required>  
+                                        <span class ="hidden"><button></button></span>
+                                    </form>
+                            </li>
+          
+                            <% }); %>
+                        <li class="list-group-item"><a class="btn btn-info" href="/additem"> Add Streamer</a>  <button class="btn btn-danger pull-right chattoggle">Chat</button> </li>
+                        
+                </ul>
+            </div>
+        </div>
+        <div id="screendiv" class="col-lg-8">
+            <div class="row">
+                <div class="container-fluid screenattr" id="screen">
+                    <div id ="videoDiv" class= "col-md-9">
+                          <div class="embed-responsive embed-responsive-16by9">
+                             <iframe class="embed-responsive-item" id="video" src="//player.twitch.tv/?channel="></iframe>
+                          </div>
+                    </div>
+                    <!--set 11 to allow easier scrolling for page vs chat-->
+                    <div id = "chatDiv" class= "col-md-3 col-xs-11">
+                          <iframe id="chat" src="//www.twitch.tv/" frameborder="0" scrolling="no" height="70%" width="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="scripts/index.js"></script>
+
+<% include ./partials/footer %>

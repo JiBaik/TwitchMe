@@ -1,0 +1,102 @@
+
+h1{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    text-shadow: 3px 3px 3px black;
+    font-size: 3em;
+}
+input[type=text]{
+    width: 120px;
+}
+input[type=number]{
+    width:35px;
+    padding-right:0;
+    margin-right:0;
+}
+
+
+input{
+    border: 3px solid rgba(0,0,0,0);
+}
+li:hover .deletebutton{
+	width: 40px;
+	opacity: 1;
+}
+.rank{
+    float: right;
+}
+.jumbotron{
+    padding-top:100px;
+}
+
+.deletebutton{
+    width:0;
+    opacity:0;
+    display: inline-block;
+    transition: 0.2s linear;
+}
+
+.dead{
+    text-decoration: line-through;
+}
+.avatar{
+    height: 30px;
+    width: 30px;
+    border: 2px solid;
+    border-color: black;
+    margin: 0px 5px;
+}
+.online{
+    color: green;
+}
+.offline{
+    color: red;
+}
+.none{
+    color: black;
+}
+.lead{
+    color: white;
+    font-size: 2em;
+    letter-spacing: .1em;
+    text-shadow: 2px 2px 2px black;
+}
+.lead a{
+    color:white;
+}
+
+.gamename{
+    text-decoration: none !important;
+    color: black;
+}
+.gamename:hover{
+    color:black;
+}
+.gamename:link{
+    color:black !important;
+}
+.screenattr{
+    margin-top:59px;
+    margin-bottom: 100px;
+}
+.screenfull{
+    padding: 10% 8%;
+}
+
+.itemactive{
+    background-color: #4285f4;
+    opacity: 0.9;
+}
+
+
+#videoDiv{
+    padding-right:0;
+}
+#chatDiv{
+    padding-left:0;
+    height:100%;
+}
+#page{
+    padding-top:70px;
+}
