@@ -14,8 +14,9 @@ var express     = require("express"),
 var   watchRoutes           = require("./routes/watch"),
       editlistRoutes        = require("./routes/editlist"),
       authRoutes            = require("./routes/auth")
-    
-mongoose.connect("mongodb://localhost/twitchme");
+      
+      //mongoose.connect("mongodb://localhost/twitchme");
+mongoose.connect("mongodb://Ji:riley@ds062898.mongolab.com:62898/twitchme");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
