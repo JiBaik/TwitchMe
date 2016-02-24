@@ -18,7 +18,7 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
                  streamer.parent().parent().find(".play").show();
                  playsrc += streamer.val();
                  //all chats are lowercase
-                 chatsrc += streamer.val().toLowerCase(); + "/chat?popout=";
+                 chatsrc += (streamer.val()).toLowerCase() + "/chat?popout=";
                  $("#video").attr("src", playsrc);
                  $("#chat").attr("src", chatsrc);
                  playchannel = true;
