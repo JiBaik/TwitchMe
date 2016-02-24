@@ -13,11 +13,12 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
             streamer.parent().prepend("<i class = 'fa fa-power-off none'></i>");
         }else{
             streamer.parent().prepend("<i class = 'fa fa-power-off online'></i>");
-            //play the first one that's online as it iterates synchronously
+            //find highest priority online
             if(!playchannel){
                  streamer.parent().parent().find(".play").show();
                  playsrc += streamer.val();
-                 chatsrc += streamer.val() + "/chat?popout=";
+                 //all chats are lowercase
+                 chatsrc += streamer.val().toLowerCase(); + "/chat?popout=";
                  $("#video").attr("src", playsrc);
                  $("#chat").attr("src", chatsrc);
                  playchannel = true;
@@ -28,7 +29,7 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
             }
      
         }
-        //get info in order 
+        console.log(streamer.val());
         channelInfo(streamer);
     })
 }
@@ -52,7 +53,6 @@ function channelInfo(streamer){
 
 $(document).ready(function() {
     var timeout = 30;
-    //resize chat to same as video periodically(incase screen size change)
     setInterval(function(){$("#chat").attr("height", $("#video").height())}, 500);
     $("p").find(".chattoggle").hide();
     $(".play").hide();
@@ -67,11 +67,11 @@ $(document).ready(function() {
 
             
 
-    //change video played to clicked
+    
     $("li").on("click", ".gamename" ,function(){
         var streamname = $(this).parent().find("input[type=text]").val();
             playsrc += streamname;
-            chatsrc += streamname + "/chat?popout=";
+            chatsrc += streamname.toLowerCase() + "/chat?popout=";
             $("#video").attr("src", playsrc);
             $("#chat").attr("src", chatsrc);
             //reset playsrc
@@ -122,7 +122,7 @@ $(document).ready(function() {
        if($("#listdiv").hasClass("col-lg-4")){
            $("#listdiv").removeClass("col-lg-4");
            $("#screendiv").removeClass("col-lg-8").addClass("col-lg-12");
-        
+        //   $("p").append("<button class='btn btn-danger pull-right chattoggle'>Chat</button>");
         $("p").find(".chattoggle").show();
            //readjust padding/margins for fullsize
            if($("#videoDiv").hasClass("col-md-12")){
