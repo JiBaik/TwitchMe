@@ -52,7 +52,7 @@ function channelInfo(streamer){
      
 
 $(document).ready(function() {
-    var timeout = 30;
+    var timeout = 50;
     setInterval(function(){$("#chat").attr("height", $("#video").height())}, 500);
     $("p").find(".chattoggle").hide();
     $(".play").hide();
@@ -62,7 +62,7 @@ $(document).ready(function() {
             //acounts for asynch in json within nested function above
             setTimeout(function(){
                 streamInfo(streamitem);
-            }, timeout += 30);
+            }, timeout += 50);
         });
 
             
