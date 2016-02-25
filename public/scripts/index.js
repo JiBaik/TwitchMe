@@ -55,14 +55,12 @@ $(document).ready(function() {
     var timeout = 50;
     //chat size is wonky, needs to be readjusted as window is resized to not cut off text
     setInterval(function(){
-        if($("body").width() > 1182){
-            if($("#chat").width()<256){
-            $("#chat").width("256px");
-            }else{
-            $("#chat").width("295px");
+        if(1447 > $("body").width() && $("body").width() > 1182){
+            if($("#chat").width()<251){
+            $("#chat").width("251px");
             }
         }else{
-         $("#chat").width($("#video").width());
+                $("#chat").width("100%");
         }
         $("#chat").attr("height", $("#video").height())
     }, 500);
