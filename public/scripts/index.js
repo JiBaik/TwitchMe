@@ -53,7 +53,20 @@ function channelInfo(streamer){
 
 $(document).ready(function() {
     var timeout = 50;
-    setInterval(function(){$("#chat").attr("height", $("#video").height())}, 500);
+    //chat size is wonky, needs to be readjusted as window is resized to not cut off text
+    setInterval(function(){
+        if($("body").width() > 1182){
+            if($("#chat").width()<256){
+            $("#chat").width("256px");
+            }else{
+            $("#chat").width("295px");
+            }
+        }else{
+         $("#chat").width($("#video").width());
+        }
+        $("#chat").attr("height", $("#video").height())
+    }, 500);
+    
     $("p").find(".chattoggle").hide();
     $(".play").hide();
     
@@ -97,8 +110,8 @@ $(document).ready(function() {
        $(".chattoggle").toggleClass("btn-danger");
        $(".chattoggle").toggleClass("btn-success");
        //check if chat exists
-       if($("#videoDiv").hasClass("col-md-9")){
-           $("#videoDiv").removeClass("col-md-9").addClass("col-md-12");
+       if($("#videoDiv").hasClass("col-lg-9")){
+           $("#videoDiv").removeClass("col-lg-9").addClass("col-lg-12");
             //readjust padding/margins for fullsize
            if(!$("#listdiv").hasClass("col-lg-4")){
                 $("#screen").removeClass("screenattr").addClass("screenfull");
@@ -106,7 +119,7 @@ $(document).ready(function() {
           
        }else{
            
-           $("#videoDiv").removeClass("col-md-12").addClass("col-md-9");
+           $("#videoDiv").removeClass("col-lg-12").addClass("col-lg-9");
            //readjust padding/margins for not fullsize
              if(!$("#listdiv").hasClass("col-lg-4")){
               $("#screen").removeClass("screenfull").addClass("screenattr");
@@ -125,7 +138,7 @@ $(document).ready(function() {
         //   $("p").append("<button class='btn btn-danger pull-right chattoggle'>Chat</button>");
         $("p").find(".chattoggle").show();
            //readjust padding/margins for fullsize
-           if($("#videoDiv").hasClass("col-md-12")){
+           if($("#videoDiv").hasClass("col-lg-12")){
                  $("#screen").removeClass("screenattr").addClass("screenfull");
            }
        }else{
@@ -134,7 +147,7 @@ $(document).ready(function() {
           
           $("p").find(".chattoggle").hide();
            //readjust padding/margins for not fullsize
-          if(!$("#videoDiv").hasClass("col-md-9")){
+          if(!$("#videoDiv").hasClass("col-lg-9")){
               $("#screen").removeClass("screenfull").addClass("screenattr");
           }
        }

@@ -6,6 +6,9 @@ h1{
     text-shadow: 3px 3px 3px black;
     font-size: 3em;
 }
+ul{
+    padding-left:0;
+}
 input[type=text]{
     width: 120px;
 }
@@ -92,9 +95,11 @@ li:hover .deletebutton{
 
 #videoDiv{
     padding-right:0;
+    padding-left:0;
 }
 #chatDiv{
     padding-left:0;
+    padding-right:0;
     height:100%;
 }
 #page{
