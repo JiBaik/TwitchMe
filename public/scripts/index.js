@@ -2,8 +2,8 @@ var playsrc = "//player.twitch.tv/?channel=";
 var chatsrc = "//www.twitch.tv/";
 var playchannel = false;
 
-var streamers =  $(".streamname");
-var length = streamers.length;
+var streamerz =  $(".streamname");
+var length = streamerz.length;
 var listIndex = 0;
 var playrank = 10;
 var played;
@@ -19,8 +19,8 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
             streamer.parent().prepend("<i class = 'fa fa-power-off none'></i>");
         }else{
             streamer.parent().prepend("<i class = 'fa fa-power-off online'></i>");
-            var currRank = streamer.parent().find("input[type='number']").val
-            //accounts for asynch of json and tracks online streamer of highest priority
+            var currRank = streamer.parent().find("input[type='number']").val();
+            //account for asynch in json and track highest priority that is online
             if(Number(currRank) < playrank){
                 playrank = currRank;
                 played = streamer;
