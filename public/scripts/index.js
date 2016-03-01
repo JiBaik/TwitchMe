@@ -2,6 +2,12 @@ var playsrc = "//player.twitch.tv/?channel=";
 var chatsrc = "//www.twitch.tv/";
 var playchannel = false;
 
+var streamers =  $(".streamname");
+var length = streamers.length;
+var listIndex = 0;
+var playrank = 10;
+var played;
+
 
 function streamInfo(streamer){
 $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" , function(data){
@@ -13,19 +19,25 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
             streamer.parent().prepend("<i class = 'fa fa-power-off none'></i>");
         }else{
             streamer.parent().prepend("<i class = 'fa fa-power-off online'></i>");
-            //find highest priority online
-            if(!playchannel){
-                 streamer.parent().parent().find(".play").show();
-                 playsrc += streamer.val();
-                 //all chats are lowercase
-                 chatsrc += (streamer.val()).toLowerCase() + "/chat?popout=";
-                 $("#video").attr("src", playsrc);
-                 $("#chat").attr("src", chatsrc);
-                 playchannel = true;
-                 //reset playsrc
-                 playsrc = "//player.twitch.tv/?channel="; 
-                 chatsrc = "//www.twitch.tv/";
-                 playchannel = true;
+            var currRank = streamer.parent().find("input[type='number']").val
+            //accounts for asynch of json and tracks online streamer of highest priority
+            if(Number(currRank) < playrank){
+                playrank = currRank;
+                played = streamer;
+                
+            }
+            //play the highest priority
+            if(listIndex >= length){
+                played.parent().find(".play").show();
+                playsrc += played.val();
+                //all chats are lowercase at this timer
+                chatsrc += played.val().toLowerCase() + "/chat?popout=";
+                $("#video").attr("src", playsrc);
+                $("#chat").attr("src", chatsrc);
+                  //reset playsrc
+                playsrc = "//player.twitch.tv/?channel="; 
+                chatsrc = "//www.twitch.tv/";
+                
             }
      
         }
@@ -52,7 +64,7 @@ function channelInfo(streamer){
      
 
 $(document).ready(function() {
-    var timeout = 50;
+    
     //chat size is wonky, needs to be readjusted as window is resized to not cut off text
     setInterval(function(){
         if(1447 > $("body").width() && $("body").width() > 1182){
@@ -68,16 +80,12 @@ $(document).ready(function() {
     $("p").find(".chattoggle").hide();
     $(".play").hide();
     
-       $(".streamname").each(function(){
+
+      $(".streamname").each(function(){
             var streamitem = $(this);
-            //acounts for asynch in json within nested function above
-            setTimeout(function(){
                 streamInfo(streamitem);
-            }, timeout += 50);
+                listIndex++;
         });
-
-            
-
     
     $("li").on("click", ".gamename" ,function(){
         var streamname = $(this).parent().find("input[type=text]").val();
