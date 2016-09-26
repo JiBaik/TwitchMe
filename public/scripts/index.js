@@ -8,6 +8,12 @@ var listIndex = 0;
 var playrank = 10;
 var played;
 
+$.ajaxSetup({
+ headers: {
+   'Client-ID': 'njf14eg677yrd3w8hunatcn0thi7o4x'
+ }
+});
+
 
 function streamInfo(streamer){
 $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" , function(data){
@@ -24,7 +30,7 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
             if(Number(currRank) < playrank){
                 playrank = currRank;
                 played = streamer;
-                
+
             }
             //play the highest priority
             if(listIndex >= length){
@@ -35,11 +41,11 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
                 $("#video").attr("src", playsrc);
                 $("#chat").attr("src", chatsrc);
                   //reset playsrc
-                playsrc = "//player.twitch.tv/?channel="; 
+                playsrc = "//player.twitch.tv/?channel=";
                 chatsrc = "//www.twitch.tv/";
-                
+
             }
-     
+
         }
         console.log(streamer.val());
         channelInfo(streamer);
@@ -61,10 +67,10 @@ function channelInfo(streamer){
         }
     });
 }
-     
+
 
 $(document).ready(function() {
-    
+
     //chat size is wonky, needs to be readjusted as window is resized to not cut off text
     setInterval(function(){
         if(1447 > $("body").width() && $("body").width() > 1182){
@@ -76,17 +82,17 @@ $(document).ready(function() {
         }
         $("#chat").attr("height", $("#video").height())
     }, 500);
-    
+
     $("p").find(".chattoggle").hide();
     $(".play").hide();
-    
+
 
       $(".streamname").each(function(){
             var streamitem = $(this);
                 streamInfo(streamitem);
                 listIndex++;
         });
-    
+
     $("li").on("click", ".gamename" ,function(){
         var streamname = $(this).parent().find("input[type=text]").val();
             playsrc += streamname;
@@ -94,9 +100,9 @@ $(document).ready(function() {
             $("#video").attr("src", playsrc);
             $("#chat").attr("src", chatsrc);
             //reset playsrc
-            playsrc = "//player.twitch.tv/?channel="; 
+            playsrc = "//player.twitch.tv/?channel=";
             chatsrc = "//www.twitch.tv/";
-            
+
             $(".play").hide();
             $(this).parent().parent().find(".play").show();
     });
@@ -109,7 +115,7 @@ $(document).ready(function() {
          $(this).parent().parent().removeClass("itemactive");
          $(this).parent().find("input").removeClass("itemactive");
      });
-     
+
     $("ul").on("click",".chattoggle", function(){
        $("#chat").fadeToggle();
        $("#chatDiv").toggleClass();
@@ -122,9 +128,9 @@ $(document).ready(function() {
            if(!$("#listdiv").hasClass("col-lg-4")){
                 $("#screen").removeClass("screenattr").addClass("screenfull");
            }
-          
+
        }else{
-           
+
            $("#videoDiv").removeClass("col-lg-12").addClass("col-lg-9");
            //readjust padding/margins for not fullsize
              if(!$("#listdiv").hasClass("col-lg-4")){
@@ -132,7 +138,7 @@ $(document).ready(function() {
           }
        }
     });
-    
+
     $("#listtoggle").on("click", function(){
        $(this).toggleClass("btn-danger");
        $(this).toggleClass("btn-success");
@@ -150,7 +156,7 @@ $(document).ready(function() {
        }else{
            $("#listdiv").addClass("col-lg-4");
            $("#screendiv").removeClass("col-lg-12").addClass("col-lg-8");
-          
+
           $("p").find(".chattoggle").hide();
            //readjust padding/margins for not fullsize
           if(!$("#videoDiv").hasClass("col-lg-9")){
@@ -159,7 +165,7 @@ $(document).ready(function() {
        }
     });
 
-   
 
-        
+
+
 });
