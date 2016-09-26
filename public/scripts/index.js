@@ -8,15 +8,14 @@ var listIndex = 0;
 var playrank = 10;
 var played;
 
-$.ajaxSetup({
+function streamInfo(streamer){
+$.ajax({
+ type: 'GET',
+ url: "https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?",
  headers: {
    'Client-ID': 'njf14eg677yrd3w8hunatcn0thi7o4x'
- }
-});
-
-
-function streamInfo(streamer){
-$.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" , function(data){
+ },
+ success: function(data) {
         if(data.stream === null){
           streamer.parent().prepend("<i class = 'fa fa-power-off offline'></i>");
         }
@@ -49,21 +48,30 @@ $.getJSON("https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?" 
         }
         console.log(streamer.val());
         channelInfo(streamer);
-    })
+    }
+  });
 }
 
 function channelInfo(streamer){
-    $.getJSON("https://api.twitch.tv/kraken/channels/"+ streamer.val()+"?callback=?" , function(data){
-        if(data.logo){
-            streamer.parent().prepend("<img class='avatar' src="+data.logo+">");
-        }else{
-            streamer.parent().prepend("<img class='avatar' src='http://oi68.tinypic.com/24z94pz.jpg'>");
-        }
-        if(data.game){
-          streamer.parent().append("<a href ='javascript:void(0)' class = 'gamename'>"+data.game+"</a>");
-        streamer.parent().append("<br><a href='javascript:void(0)'  class='gamename'>"+data.status +"</a>")
-        }else{
-            streamer.parent().append("<span> Does not exist </span>");
+
+  $.ajax({
+     type: 'GET',
+     url: "https://api.twitch.tv/kraken/channels/"+ streamer.val()+"?callback=?" ,
+     headers: {
+       'Client-ID': 'njf14eg677yrd3w8hunatcn0thi7o4x'
+     },
+     success: function(data) {
+            if(data.logo){
+                streamer.parent().prepend("<img class='avatar' src="+data.logo+">");
+            }else{
+                streamer.parent().prepend("<img class='avatar' src='http://oi68.tinypic.com/24z94pz.jpg'>");
+            }
+            if(data.game){
+              streamer.parent().append("<a href ='javascript:void(0)' class = 'gamename'>"+data.game+"</a>");
+            streamer.parent().append("<br><a href='javascript:void(0)'  class='gamename'>"+data.status +"</a>")
+            }else{
+                streamer.parent().append("<span> Does not exist </span>");
+            }
         }
     });
 }
