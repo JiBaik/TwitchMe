@@ -9,12 +9,12 @@ var express     = require("express"),
     methodOverride        = require("method-override"),
     LocalStrategy         = require("passport-local"),
     passportLocalMongoose = require("passport-local-mongoose")
-    
+
 //routes
 var   watchRoutes           = require("./routes/watch"),
       editlistRoutes        = require("./routes/editlist"),
       authRoutes            = require("./routes/auth")
-      
+
       //mongoose.connect("mongodb://localhost/twitchme");
 mongoose.connect("mongodb://Ji:riley@ds062898.mongolab.com:62898/twitchme");
 app.set("view engine", "ejs");
@@ -52,10 +52,18 @@ app.use(watchRoutes);
 app.use(editlistRoutes);
 
 app.get("*", function(req, res){
-  res.render("error"); 
+  res.render("error");
 });
 
+var port = process.env.PORT || 3000;
 
-app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("You're online"); 
-});
+if(process.env.IP){
+  app.listen(port, process.env.IP, function(){
+     console.log("You're online");
+  });
+}else{
+  app.listen(port, function(){
+   console.log("You're online");
+  });
+}
+

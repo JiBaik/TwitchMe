@@ -11,7 +11,7 @@ var played;
 function streamInfo(streamer){
 $.ajax({
  type: 'GET',
- url: "https://api.twitch.tv/kraken/streams/"+ streamer.val()+"?callback=?",
+ url: "https://api.twitch.tv/kraken/streams/"+ streamer.val(),
  headers: {
    'Client-ID': 'njf14eg677yrd3w8hunatcn0thi7o4x'
  },
@@ -37,8 +37,8 @@ $.ajax({
                 playsrc += played.val();
                 //all chats are lowercase at this timer
                 chatsrc += played.val().toLowerCase() + "/chat?popout=";
-                $("#video").attr("src", playsrc);
-                $("#chat").attr("src", chatsrc);
+                $("#video").attr("src", playsrc+"&output=embed");
+                $("#chat").attr("src", chatsrc+"&output=embed");
                   //reset playsrc
                 playsrc = "//player.twitch.tv/?channel=";
                 chatsrc = "//www.twitch.tv/";
@@ -56,7 +56,7 @@ function channelInfo(streamer){
 
   $.ajax({
      type: 'GET',
-     url: "https://api.twitch.tv/kraken/channels/"+ streamer.val()+"?callback=?" ,
+     url: "https://api.twitch.tv/kraken/channels/"+ streamer.val() ,
      headers: {
        'Client-ID': 'njf14eg677yrd3w8hunatcn0thi7o4x'
      },

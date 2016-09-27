@@ -18,19 +18,19 @@
                         <% user.list.forEach(function(listitem){ %>
                             <li class="list-group-item stream">
                                     <i class = 'fa fa-play play'></i>
-                                    <form style="display: inline" class="pull-left" action="/deleteitem/<%=listitem._id%>?_method=DELETE" method="POST"> 
+                                    <form style="display: inline" class="pull-left" action="/deleteitem/<%=listitem._id%>?_method=DELETE" method="POST">
                                     <span class ="deletebutton"><button class="fa fa-trash btn btn-danger"></button></span></form>
                                     <form style="display: inline" action="/edititem/<%=listitem._id%>?_method=PUT" method="POST">
                                         <input class = "streamname" type="text" name="listitem[streamName]" value = "<%= listitem.streamName %>" required>|
-                                           
-                                        <input class = "pull-right" type="number" min="1" max = "10" name = "listitem[rank]" value = "<%=listitem.rank%>" required>  
+
+                                        <input class = "pull-right" type="number" min="1" max = "10" name = "listitem[rank]" value = "<%=listitem.rank%>" required>
                                         <span class ="hidden"><button></button></span>
                                     </form>
                             </li>
-          
+
                             <% }); %>
                         <li class="list-group-item"><a class="btn btn-info" href="/additem"> Add Streamer</a>  <button class="btn btn-danger pull-right chattoggle">Chat</button> </li>
-                        
+
                 </ul>
             </div>
         </div>
